@@ -1,8 +1,9 @@
-require(["vue", "jquery", './myModule'], function (vue, $, md) {
+require(["vue", "jquery", './myModule', './clone'], function (vue, $, md, clone) {
   console.log("v", vue);
   console.log("jq", $);
   console.log('md', md);
   console.log(md.myFn());
+  console.log(clone);
 
   window.vm = new vue({
     name: 'App',
