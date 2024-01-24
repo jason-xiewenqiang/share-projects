@@ -10,5 +10,7 @@
       "declarationDir": "./lib",
       "outDir": "./lib",
       "declarationMap": false
-  }
+  },
+  "exclude": ["test/*"],
+  "include": ["src/**/*"]
 }
