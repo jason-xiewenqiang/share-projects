@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+      "target": "ES5",
+      "lib": ["ESNext", "DOM", "DOM.Iterable"],
+      "module": "ES2015",
+      "strict": true,
+      "declaration": true,
+      "skipLibCheck": true,
+      "moduleResolution": "Bundler",
+      "declarationDir": "./lib",
+      "outDir": "./lib",
+      "declarationMap": false
+  }
+}
