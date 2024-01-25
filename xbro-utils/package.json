@@ -1,9 +1,23 @@
 {
-  "name": "xbro-utils",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@xbro/xbro-utils",
+  "version": "1.0.1",
+  "description": "Xbrother 前端工具函数库",
   "type": "module",
+  "files": ["lib"],
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    },
+    "./*": "./*"
+  },
+  "typings": "./lib/types/index.d.ts",
   "scripts": {
     "clean": "rimraf ./lib",
     "test": "vitest",
@@ -11,9 +25,9 @@
     "coverage": "vitest run --coverage",
     "build": "npm run clean && rollup --config rollup.config.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["xbro-utils", "rollup", "vitest", "vuepress", "typescript"],
+  "author": "xiewenqiang@xbrother.com",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",

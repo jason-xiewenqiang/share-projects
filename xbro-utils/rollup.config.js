@@ -9,7 +9,7 @@ export default {
   output: [
     {
       format: 'umd',
-      file: 'lib/index.umd.js',
+      file: 'lib/index.js',
       name: 'XbroUtils',
       plugins: [tarser()],
     },
@@ -17,11 +17,13 @@ export default {
       format: 'esm',
       file: 'lib/index.esm.js',
       name: 'XbroUtils',
+      plugins: [tarser()],
     },
     {
       format: 'iife',
       file: 'lib/index.iife.js',
       name: 'XbroUtils',
+      plugins: [tarser()],
     },
   ],
   plugins: [
