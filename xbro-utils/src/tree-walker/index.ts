@@ -1,4 +1,3 @@
-
 export type NodeItem = {
   id?: string;
   parentId?: string | number;
@@ -6,7 +5,6 @@ export type NodeItem = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
-
 
 /**
  * 树结构遍历函数
@@ -22,11 +20,11 @@ export function walk(
     item: NodeItem,
     i: number,
     parents: NodeItem[],
-    ctrl: { stop: boolean }
+    ctrl: { stop: boolean },
   ) => void,
   parents = [] as NodeItem[],
   ctrl = { stop: false },
-  childrenKey = "children"
+  childrenKey = 'children',
 ) {
   if (Array.isArray(nodeList)) {
     for (let i = 0, l = nodeList.length; i < l; i++) {
@@ -45,4 +43,3 @@ export function walk(
     }
   }
 }
-
