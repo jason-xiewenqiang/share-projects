@@ -21,10 +21,17 @@ const tree: NodeItem[] = [
       { id: '2-2', name: '2-2', parentId: '2' },
       { id: '2-3', name: '2-3', parentId: '2' },
       { id: '2-4', name: '2-4', parentId: '2' },
+      {
+        id: '2-5',
+        name: '2-5',
+        parentId: '2',
+        children: [{ id: '2-5-1', name: '2-5-1', parentId: '2-5' }],
+      },
     ],
   },
 ];
 
+// 匹配目标节点
 const findNode = (id: string) => {
   let node;
   const ctrl = { stop: false };
@@ -42,6 +49,24 @@ const findNode = (id: string) => {
   return !!node;
 };
 
+const getNodePath = (id: string) => {
+  let path = '';
+  const ctrl = { stop: false };
+  walk(
+    tree,
+    (item, index, parent) => {
+      if (item.id === id) {
+        console.log(index);
+        path = [...parent.map((p) => p.id), item.id].join('/');
+        ctrl.stop = true;
+      }
+    },
+    [],
+    ctrl,
+  );
+  return path;
+};
+
 test('test tree exit "1"', () => {
   expect(findNode('1')).toBe(true);
 });
@@ -52,4 +77,12 @@ test('test tree not exit "3"', () => {
 
 test('test tree exit treeId "2"', () => {
   expect(findNode('2')).toBe(true);
+});
+
+test('test tree treeIdPath "2-5-1" tobe "2/2-5/2-5-1"', () => {
+  expect(getNodePath('2-5-1')).toBe('2/2-5/2-5-1');
+});
+
+test('test tree treeIdPath "2-5-2" to be ""', () => {
+  expect(getNodePath('2-5-2')).toBe('');
 });
