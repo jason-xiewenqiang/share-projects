@@ -1,1 +1,91 @@
-!function(e,r){"object"==typeof exports&&"undefined"!=typeof module?r(exports):"function"==typeof define&&define.amd?define(["exports"],r):r((e="undefined"!=typeof globalThis?globalThis:e||self).XbroUtils={})}(this,(function(e){"use strict";function r(e,r,o){if(o||2===arguments.length)for(var t,n=0,i=r.length;n<i;n++)!t&&n in r||(t||(t=Array.prototype.slice.call(r,0,n)),t[n]=r[n]);return e.concat(t||Array.prototype.slice.call(r))}"function"==typeof SuppressedError&&SuppressedError;e.toHump=function(e){if(e.includes("_")){var o=e.split("_"),t=o.slice(1).map((function(e){return e.charAt(0).toUpperCase()+e.slice(1)}));return r([o[0]],t,!0).join("")}return e},e.toUnderline=function(e){return e.replaceAll(/A-Z/g,(function(e){return"_".concat(e.toLowerCase())}))},e.walk=function e(o,t,n,i,l){var p;if(void 0===n&&(n=[]),void 0===i&&(i={stop:!1}),void 0===l&&(l="children"),Array.isArray(o))for(var c=0,f=o.length;c<f&&(t(o[c],c,n,i),!i.stop);c++){var s=(null===(p=o[c])||void 0===p?void 0:p[l])||[],u=o[c];n.push(u),s&&s.length&&e(s,t,r([],n,!0),i),n.pop()}}}));
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
+
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
+/**
+ * 树结构遍历函数
+ * @param nodeList 节点数组
+ * @param callback 遍历节点回调，传入：节点，节点索引，父级节点数组，控制器(stop - 设置为true时，可以停止遍历)
+ * @param parents 各级父级节点
+ * @param ctrl 控制是否停止遍历
+ * @param childrenKey 子项的键
+ */
+function walk(nodeList, callback, parents, ctrl, childrenKey) {
+    var _a;
+    if (parents === void 0) { parents = []; }
+    if (ctrl === void 0) { ctrl = { stop: false }; }
+    if (childrenKey === void 0) { childrenKey = 'children'; }
+    if (Array.isArray(nodeList)) {
+        for (var i = 0, l = nodeList.length; i < l; i++) {
+            callback(nodeList[i], i, parents, ctrl);
+            if (!ctrl.stop) {
+                var children = ((_a = nodeList[i]) === null || _a === void 0 ? void 0 : _a[childrenKey]) || [];
+                var node = nodeList[i];
+                parents.push(node);
+                if (children && children.length) {
+                    walk(children, callback, __spreadArray([], parents, true), ctrl);
+                }
+                parents.pop();
+            }
+            else {
+                break;
+            }
+        }
+    }
+}
+
+/**
+ * 下划线单词装驼峰
+ * @param word 英文（有下划线）
+ * @returns { String } 驼峰格式
+ */
+var toHump = function (word) {
+    if (word.includes('_')) {
+        var strs = word.split('_');
+        var allHums = strs
+            .slice(1)
+            .map(function (str) { return str.charAt(0).toUpperCase() + str.slice(1); });
+        return __spreadArray([strs[0]], allHums, true).join('');
+    }
+    return word;
+};
+/**
+ * 驼峰单词转下划线
+ * @param word 英文
+ * @returns { String } 下划线格式
+ */
+var toUnderline = function (word) {
+    return word.replaceAll(/A-Z/g, function (str) {
+        return "_".concat(str.toLowerCase());
+    });
+};
+
+export { toHump, toUnderline, walk };

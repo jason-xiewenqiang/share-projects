@@ -9,27 +9,25 @@ export default {
   output: [
     {
       format: 'umd',
-      file: 'lib/index.js',
+      file: 'lib/index.umd.js',
       name: 'XbroUtils',
-      plugins: [tarser()],
+      // plugins: [tarser()],
     },
     {
       format: 'esm',
-      file: 'lib/index.esm.js',
-      name: 'XbroUtils',
-      plugins: [tarser()],
+      file: 'lib/index.js',
+      // plugins: [tarser()],
     },
     {
       format: 'iife',
       file: 'lib/index.iife.js',
       name: 'XbroUtils',
-      plugins: [tarser()],
+      // plugins: [tarser()],
     },
     {
       format: 'cjs',
       file: 'lib/index.cjs.js',
-      name: 'XbroUtils',
-      plugins: [tarser()],
+      // plugins: [tarser()],
     },
   ],
   plugins: [

@@ -1,6 +1,6 @@
 {
   "name": "@xbro/xbro-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Xbrother 前端工具函数库",
   "type": "module",
   "files": [
@@ -15,7 +15,7 @@
   "exports": {
     ".": {
       "import": "./lib/index.js",
-      "require": "./lib/index.js"
+      "require": "./lib/index.cjs.js"
     },
     "./*": "./*"
   },
