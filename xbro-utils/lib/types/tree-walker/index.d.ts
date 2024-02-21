@@ -12,7 +12,7 @@ export type NodeItem = {
  * @param ctrl 控制是否停止遍历
  * @param childrenKey 子项的键
  */
-export declare function walk(nodeList: NodeItem[], callback: (item: NodeItem, i: number, parents: NodeItem[], ctrl: {
+export default function walk(nodeList: NodeItem[], callback: (item: NodeItem, i: number, parents: NodeItem[], ctrl: {
     stop: boolean;
 }) => void, parents?: NodeItem[], ctrl?: {
     stop: boolean;

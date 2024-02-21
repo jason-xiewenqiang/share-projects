@@ -25,6 +25,12 @@ export default {
       name: 'XbroUtils',
       plugins: [tarser()],
     },
+    {
+      format: 'cjs',
+      file: 'lib/index.cjs.js',
+      name: 'XbroUtils',
+      plugins: [tarser()],
+    },
   ],
   plugins: [
     nodeResolve(),

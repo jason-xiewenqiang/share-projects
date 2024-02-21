@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 
-import { NodeItem, walk } from '../src/tree-walker';
+import walk, { NodeItem } from '../src/tree-walker';
 
 const tree: NodeItem[] = [
   {
