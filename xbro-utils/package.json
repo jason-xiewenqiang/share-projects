@@ -1,6 +1,6 @@
 {
   "name": "@xbro/xbro-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Xbrother 前端工具函数库",
   "type": "module",
   "files": [

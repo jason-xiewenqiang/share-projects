@@ -1,5 +1,4 @@
 import { test, expect } from 'vitest';
-
 import walk, { NodeItem } from '../src/tree-walker';
 
 const tree: NodeItem[] = [

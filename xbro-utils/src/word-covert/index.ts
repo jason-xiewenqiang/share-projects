@@ -6,11 +6,15 @@ export interface WordSign {
 /**
  * 下划线单词装驼峰
  * @param word 英文（有下划线）
+ * @example <caption>cameCase('hello_world')</caption>
+ * // returns helloWorld
  * @returns { String } 驼峰格式
+ * @see {@link more} for further information.
+ * @see {@link https://www.lodashjs.com/docs/lodash.camelCase|lodash.camelCase}
  */
-export const toHump = (word: string): string => {
-  if (word.includes('_')) {
-    const strs = word.split('_');
+export const cameCase = (word: string, connector = '_'): string => {
+  if (word.includes(connector)) {
+    const strs = word.split(connector);
     const allHums = strs
       .slice(1)
       .map((str) => str.charAt(0).toUpperCase() + str.slice(1));
@@ -22,10 +26,19 @@ export const toHump = (word: string): string => {
 /**
  * 驼峰单词转下划线
  * @param word 英文
+ * @example <caption>kebabCase('helloWorld')</caption>
+ * // returns hello_world
  * @returns { String } 下划线格式
+ * @see {@link more} for further information.
+ * @see {@link https://www.lodashjs.com/docs/lodash.kebabCase|lodash.kebabCase}
  */
-export const toUnderline = (word: string): string => {
-  return word.replaceAll(/A-Z/g, function (str) {
-    return `_${str.toLowerCase()}`;
-  });
+export const kebabCase = (word: string, connector = '_'): string => {
+  const cases = word.match(/[A-Z][a-z]{0,}/g) || [];
+  const firstWord = word.replace(cases.join(''), '');
+  return (
+    firstWord +
+    cases.reduce((result: string, word: string) => {
+      return result + connector + word.toLowerCase();
+    }, '')
+  );
 };
